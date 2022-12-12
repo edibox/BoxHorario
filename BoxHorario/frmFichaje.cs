@@ -43,9 +43,6 @@ namespace BoxHorario
             panellogin.Visible = true;
 
             lbldia.Text = DateTime.Now.ToLongDateString();
-
-            txtUsuario.Text = "1234";
-            txtClave.Text = "1234";
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
