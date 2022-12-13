@@ -227,7 +227,10 @@ namespace BoxHorario
         {
             CerrarCamara();
             timer2.Enabled = false;
-            foto.Image.Save(ruta + fichero + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg", ImageFormat.Jpeg);
+
+            int id = GrabarFichaje(); 
+            
+            foto.Image.Save(ruta + id.ToString().Trim() + "_" + fichero + ".jpg", ImageFormat.Jpeg);
             foto.Image.Dispose();
 
             //vuelve a pedir login
@@ -238,7 +241,7 @@ namespace BoxHorario
             panellogin.Visible = true;
             btnAceptar.Enabled = true;
 
-            GrabarFichaje();
+            
         }
         private void btnEntrada_Click(object sender, EventArgs e)
         {
@@ -406,7 +409,7 @@ namespace BoxHorario
                         command.Parameters.Add("@FechaSalida", SqlDbType.DateTime).Value = fsalida;
                     else
                         command.Parameters.Add("@FechaSalida", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
-                    return (int)command.ExecuteNonQuery();
+                    return (int)command.ExecuteScalar();
                 }
             }
         }
