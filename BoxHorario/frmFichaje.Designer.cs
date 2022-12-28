@@ -32,11 +32,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFichaje));
             this.foto = new System.Windows.Forms.PictureBox();
             this.panelcabecera = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.lbldia = new System.Windows.Forms.Label();
+            this.picathos = new System.Windows.Forms.PictureBox();
             this.lblhora = new System.Windows.Forms.Label();
             this.panelcamara = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panelfichaje = new System.Windows.Forms.Panel();
+            this.btnSalida = new System.Windows.Forms.Button();
+            this.btnPausa = new System.Windows.Forms.Button();
+            this.lblmesaje = new System.Windows.Forms.Label();
+            this.btnEntrada = new System.Windows.Forms.Button();
+            this.btnReanudar = new System.Windows.Forms.Button();
+            this.lblsalida = new System.Windows.Forms.Label();
+            this.lblentrada = new System.Windows.Forms.Label();
+            this.lblsalidadescanso = new System.Windows.Forms.Label();
+            this.lblentradadescando = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtClave = new System.Windows.Forms.TextBox();
@@ -44,24 +55,15 @@
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.panellogin = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnSalida = new System.Windows.Forms.Button();
-            this.btnPausa = new System.Windows.Forms.Button();
-            this.btnEntrada = new System.Windows.Forms.Button();
-            this.btnReanudar = new System.Windows.Forms.Button();
-            this.lblentrada = new System.Windows.Forms.Label();
-            this.lblsalidadescanso = new System.Windows.Forms.Label();
-            this.lblentradadescando = new System.Windows.Forms.Label();
-            this.lblsalida = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lblmesaje = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.picrequena = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.foto)).BeginInit();
             this.panelcabecera.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picathos)).BeginInit();
             this.panelcamara.SuspendLayout();
             this.panelfichaje.SuspendLayout();
             this.panellogin.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picrequena)).BeginInit();
             this.SuspendLayout();
             // 
             // foto
@@ -76,15 +78,27 @@
             // panelcabecera
             // 
             this.panelcabecera.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelcabecera.Controls.Add(this.picrequena);
             this.panelcabecera.Controls.Add(this.label8);
             this.panelcabecera.Controls.Add(this.lbldia);
-            this.panelcabecera.Controls.Add(this.pictureBox2);
+            this.panelcabecera.Controls.Add(this.picathos);
             this.panelcabecera.Controls.Add(this.lblhora);
             this.panelcabecera.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelcabecera.Location = new System.Drawing.Point(0, 0);
             this.panelcabecera.Name = "panelcabecera";
             this.panelcabecera.Size = new System.Drawing.Size(793, 130);
             this.panelcabecera.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label8.Location = new System.Drawing.Point(224, 8);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(359, 65);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Control Horario";
             // 
             // lbldia
             // 
@@ -97,12 +111,22 @@
             this.lbldia.Text = "miercoles, 31 de diciembre de 2022";
             this.lbldia.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // picathos
+            // 
+            this.picathos.Image = ((System.Drawing.Image)(resources.GetObject("picathos.Image")));
+            this.picathos.Location = new System.Drawing.Point(3, 3);
+            this.picathos.Name = "picathos";
+            this.picathos.Size = new System.Drawing.Size(173, 74);
+            this.picathos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picathos.TabIndex = 6;
+            this.picathos.TabStop = false;
+            // 
             // lblhora
             // 
             this.lblhora.AutoSize = true;
             this.lblhora.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblhora.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblhora.Location = new System.Drawing.Point(20, 75);
+            this.lblhora.Location = new System.Drawing.Point(638, 24);
             this.lblhora.Name = "lblhora";
             this.lblhora.Size = new System.Drawing.Size(136, 45);
             this.lblhora.TabIndex = 0;
@@ -145,6 +169,143 @@
             this.panelfichaje.Name = "panelfichaje";
             this.panelfichaje.Size = new System.Drawing.Size(793, 222);
             this.panelfichaje.TabIndex = 0;
+            // 
+            // btnSalida
+            // 
+            this.btnSalida.BackColor = System.Drawing.Color.Indigo;
+            this.btnSalida.Enabled = false;
+            this.btnSalida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalida.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalida.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnSalida.Image = ((System.Drawing.Image)(resources.GetObject("btnSalida.Image")));
+            this.btnSalida.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSalida.Location = new System.Drawing.Point(533, 92);
+            this.btnSalida.Name = "btnSalida";
+            this.btnSalida.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.btnSalida.Size = new System.Drawing.Size(222, 51);
+            this.btnSalida.TabIndex = 8;
+            this.btnSalida.Text = "     Salida";
+            this.btnSalida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSalida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSalida.UseVisualStyleBackColor = false;
+            this.btnSalida.Click += new System.EventHandler(this.btnSalida_Click);
+            // 
+            // btnPausa
+            // 
+            this.btnPausa.BackColor = System.Drawing.Color.Indigo;
+            this.btnPausa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPausa.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPausa.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnPausa.Image = ((System.Drawing.Image)(resources.GetObject("btnPausa.Image")));
+            this.btnPausa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPausa.Location = new System.Drawing.Point(293, 92);
+            this.btnPausa.Name = "btnPausa";
+            this.btnPausa.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.btnPausa.Size = new System.Drawing.Size(222, 51);
+            this.btnPausa.TabIndex = 9;
+            this.btnPausa.Text = "     Pausa";
+            this.btnPausa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPausa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnPausa.UseVisualStyleBackColor = false;
+            this.btnPausa.Click += new System.EventHandler(this.btnPausa_Click);
+            // 
+            // lblmesaje
+            // 
+            this.lblmesaje.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.lblmesaje.ForeColor = System.Drawing.Color.White;
+            this.lblmesaje.Location = new System.Drawing.Point(50, 41);
+            this.lblmesaje.Name = "lblmesaje";
+            this.lblmesaje.Size = new System.Drawing.Size(705, 32);
+            this.lblmesaje.TabIndex = 6;
+            this.lblmesaje.Text = "¡Buenos días!  Op. Cristina Soriano";
+            this.lblmesaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnEntrada
+            // 
+            this.btnEntrada.BackColor = System.Drawing.Color.Indigo;
+            this.btnEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEntrada.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEntrada.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnEntrada.Image = ((System.Drawing.Image)(resources.GetObject("btnEntrada.Image")));
+            this.btnEntrada.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEntrada.Location = new System.Drawing.Point(50, 92);
+            this.btnEntrada.Name = "btnEntrada";
+            this.btnEntrada.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.btnEntrada.Size = new System.Drawing.Size(222, 51);
+            this.btnEntrada.TabIndex = 10;
+            this.btnEntrada.Text = "     Entrada";
+            this.btnEntrada.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEntrada.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEntrada.UseVisualStyleBackColor = false;
+            this.btnEntrada.Click += new System.EventHandler(this.btnEntrada_Click);
+            // 
+            // btnReanudar
+            // 
+            this.btnReanudar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.btnReanudar.Enabled = false;
+            this.btnReanudar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReanudar.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReanudar.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnReanudar.Image = ((System.Drawing.Image)(resources.GetObject("btnReanudar.Image")));
+            this.btnReanudar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReanudar.Location = new System.Drawing.Point(290, 92);
+            this.btnReanudar.Name = "btnReanudar";
+            this.btnReanudar.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.btnReanudar.Size = new System.Drawing.Size(222, 51);
+            this.btnReanudar.TabIndex = 11;
+            this.btnReanudar.Text = "     Reanudar";
+            this.btnReanudar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReanudar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnReanudar.UseVisualStyleBackColor = false;
+            this.btnReanudar.Click += new System.EventHandler(this.btnReanudar_Click);
+            // 
+            // lblsalida
+            // 
+            this.lblsalida.AutoSize = true;
+            this.lblsalida.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.lblsalida.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblsalida.Location = new System.Drawing.Point(600, 150);
+            this.lblsalida.Name = "lblsalida";
+            this.lblsalida.Size = new System.Drawing.Size(71, 32);
+            this.lblsalida.TabIndex = 14;
+            this.lblsalida.Text = "08:00";
+            this.lblsalida.Visible = false;
+            // 
+            // lblentrada
+            // 
+            this.lblentrada.AutoSize = true;
+            this.lblentrada.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.lblentrada.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblentrada.Location = new System.Drawing.Point(122, 150);
+            this.lblentrada.Name = "lblentrada";
+            this.lblentrada.Size = new System.Drawing.Size(71, 32);
+            this.lblentrada.TabIndex = 6;
+            this.lblentrada.Text = "08:00";
+            this.lblentrada.Visible = false;
+            // 
+            // lblsalidadescanso
+            // 
+            this.lblsalidadescanso.AutoSize = true;
+            this.lblsalidadescanso.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.lblsalidadescanso.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblsalidadescanso.Location = new System.Drawing.Point(318, 150);
+            this.lblsalidadescanso.Name = "lblsalidadescanso";
+            this.lblsalidadescanso.Size = new System.Drawing.Size(71, 32);
+            this.lblsalidadescanso.TabIndex = 12;
+            this.lblsalidadescanso.Text = "08:00";
+            this.lblsalidadescanso.Visible = false;
+            // 
+            // lblentradadescando
+            // 
+            this.lblentradadescando.AutoSize = true;
+            this.lblentradadescando.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.lblentradadescando.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblentradadescando.Location = new System.Drawing.Point(410, 150);
+            this.lblentradadescando.Name = "lblentradadescando";
+            this.lblentradadescando.Size = new System.Drawing.Size(71, 32);
+            this.lblentradadescando.TabIndex = 13;
+            this.lblentradadescando.Text = "08:00";
+            this.lblentradadescando.Visible = false;
             // 
             // btnAceptar
             // 
@@ -233,168 +394,20 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(173, 74);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            // 
-            // btnSalida
-            // 
-            this.btnSalida.BackColor = System.Drawing.Color.Indigo;
-            this.btnSalida.Enabled = false;
-            this.btnSalida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalida.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalida.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnSalida.Image = ((System.Drawing.Image)(resources.GetObject("btnSalida.Image")));
-            this.btnSalida.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalida.Location = new System.Drawing.Point(533, 92);
-            this.btnSalida.Name = "btnSalida";
-            this.btnSalida.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.btnSalida.Size = new System.Drawing.Size(222, 51);
-            this.btnSalida.TabIndex = 8;
-            this.btnSalida.Text = "     Salida";
-            this.btnSalida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalida.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSalida.UseVisualStyleBackColor = false;
-            this.btnSalida.Click += new System.EventHandler(this.btnSalida_Click);
-            // 
-            // btnPausa
-            // 
-            this.btnPausa.BackColor = System.Drawing.Color.Indigo;
-            this.btnPausa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPausa.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPausa.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnPausa.Image = ((System.Drawing.Image)(resources.GetObject("btnPausa.Image")));
-            this.btnPausa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPausa.Location = new System.Drawing.Point(293, 92);
-            this.btnPausa.Name = "btnPausa";
-            this.btnPausa.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.btnPausa.Size = new System.Drawing.Size(222, 51);
-            this.btnPausa.TabIndex = 9;
-            this.btnPausa.Text = "     Pausa";
-            this.btnPausa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPausa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPausa.UseVisualStyleBackColor = false;
-            this.btnPausa.Click += new System.EventHandler(this.btnPausa_Click);
-            // 
-            // btnEntrada
-            // 
-            this.btnEntrada.BackColor = System.Drawing.Color.Indigo;
-            this.btnEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEntrada.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEntrada.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnEntrada.Image = ((System.Drawing.Image)(resources.GetObject("btnEntrada.Image")));
-            this.btnEntrada.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEntrada.Location = new System.Drawing.Point(50, 92);
-            this.btnEntrada.Name = "btnEntrada";
-            this.btnEntrada.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.btnEntrada.Size = new System.Drawing.Size(222, 51);
-            this.btnEntrada.TabIndex = 10;
-            this.btnEntrada.Text = "     Entrada";
-            this.btnEntrada.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEntrada.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEntrada.UseVisualStyleBackColor = false;
-            this.btnEntrada.Click += new System.EventHandler(this.btnEntrada_Click);
-            // 
-            // btnReanudar
-            // 
-            this.btnReanudar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.btnReanudar.Enabled = false;
-            this.btnReanudar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReanudar.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReanudar.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnReanudar.Image = ((System.Drawing.Image)(resources.GetObject("btnReanudar.Image")));
-            this.btnReanudar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReanudar.Location = new System.Drawing.Point(290, 92);
-            this.btnReanudar.Name = "btnReanudar";
-            this.btnReanudar.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.btnReanudar.Size = new System.Drawing.Size(222, 51);
-            this.btnReanudar.TabIndex = 11;
-            this.btnReanudar.Text = "     Reanudar";
-            this.btnReanudar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReanudar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnReanudar.UseVisualStyleBackColor = false;
-            this.btnReanudar.Click += new System.EventHandler(this.btnReanudar_Click);
-            // 
-            // lblentrada
-            // 
-            this.lblentrada.AutoSize = true;
-            this.lblentrada.Font = new System.Drawing.Font("Segoe UI", 18F);
-            this.lblentrada.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblentrada.Location = new System.Drawing.Point(122, 150);
-            this.lblentrada.Name = "lblentrada";
-            this.lblentrada.Size = new System.Drawing.Size(71, 32);
-            this.lblentrada.TabIndex = 6;
-            this.lblentrada.Text = "08:00";
-            this.lblentrada.Visible = false;
-            // 
-            // lblsalidadescanso
-            // 
-            this.lblsalidadescanso.AutoSize = true;
-            this.lblsalidadescanso.Font = new System.Drawing.Font("Segoe UI", 18F);
-            this.lblsalidadescanso.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblsalidadescanso.Location = new System.Drawing.Point(318, 150);
-            this.lblsalidadescanso.Name = "lblsalidadescanso";
-            this.lblsalidadescanso.Size = new System.Drawing.Size(71, 32);
-            this.lblsalidadescanso.TabIndex = 12;
-            this.lblsalidadescanso.Text = "08:00";
-            this.lblsalidadescanso.Visible = false;
-            // 
-            // lblentradadescando
-            // 
-            this.lblentradadescando.AutoSize = true;
-            this.lblentradadescando.Font = new System.Drawing.Font("Segoe UI", 18F);
-            this.lblentradadescando.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblentradadescando.Location = new System.Drawing.Point(410, 150);
-            this.lblentradadescando.Name = "lblentradadescando";
-            this.lblentradadescando.Size = new System.Drawing.Size(71, 32);
-            this.lblentradadescando.TabIndex = 13;
-            this.lblentradadescando.Text = "08:00";
-            this.lblentradadescando.Visible = false;
-            // 
-            // lblsalida
-            // 
-            this.lblsalida.AutoSize = true;
-            this.lblsalida.Font = new System.Drawing.Font("Segoe UI", 18F);
-            this.lblsalida.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblsalida.Location = new System.Drawing.Point(600, 150);
-            this.lblsalida.Name = "lblsalida";
-            this.lblsalida.Size = new System.Drawing.Size(71, 32);
-            this.lblsalida.TabIndex = 14;
-            this.lblsalida.Text = "08:00";
-            this.lblsalida.Visible = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label8.Location = new System.Drawing.Point(256, 8);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(359, 65);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Control Horario";
-            // 
-            // lblmesaje
-            // 
-            this.lblmesaje.Font = new System.Drawing.Font("Segoe UI", 18F);
-            this.lblmesaje.ForeColor = System.Drawing.Color.White;
-            this.lblmesaje.Location = new System.Drawing.Point(50, 41);
-            this.lblmesaje.Name = "lblmesaje";
-            this.lblmesaje.Size = new System.Drawing.Size(705, 32);
-            this.lblmesaje.TabIndex = 6;
-            this.lblmesaje.Text = "¡Buenos días!  Op. Cristina Soriano";
-            this.lblmesaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // timer2
             // 
             this.timer2.Interval = 30000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // picrequena
+            // 
+            this.picrequena.Image = ((System.Drawing.Image)(resources.GetObject("picrequena.Image")));
+            this.picrequena.Location = new System.Drawing.Point(-1, 8);
+            this.picrequena.Name = "picrequena";
+            this.picrequena.Size = new System.Drawing.Size(173, 93);
+            this.picrequena.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picrequena.TabIndex = 7;
+            this.picrequena.TabStop = false;
             // 
             // frmFichaje
             // 
@@ -417,12 +430,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.foto)).EndInit();
             this.panelcabecera.ResumeLayout(false);
             this.panelcabecera.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picathos)).EndInit();
             this.panelcamara.ResumeLayout(false);
             this.panelfichaje.ResumeLayout(false);
             this.panelfichaje.PerformLayout();
             this.panellogin.ResumeLayout(false);
             this.panellogin.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picrequena)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -438,7 +452,7 @@
         private System.Windows.Forms.Label lblhora;
         private System.Windows.Forms.Panel panellogin;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox picathos;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtClave;
@@ -455,5 +469,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblmesaje;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.PictureBox picrequena;
     }
 }

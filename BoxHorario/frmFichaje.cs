@@ -1,27 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using AForge.Video;
+using AForge.Video.DirectShow;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Security.Policy;
+using System.IO;
+using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using AForge.Video;
-using AForge.Video.DirectShow;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using EnterpriseDT.Net.Ftp;
+using EnterpriseDT.Util;
 
 namespace BoxHorario
 {
     public partial class frmFichaje : Form
     {
-        string ruta = @"c:\xls\";
-        string cadenaConexion = "Data Source=46.226.45.108;Initial Catalog=Box;;User ID=sa;password=2015villaL";
+        //todo:cambiar antes de publicar
+
+        int lIDEmpresa = 2;     //1=Athos,2=requena
+
+        string ruta = "", serverftp = "", userftp = "", passftp = "";
+        string cadenaConexion = "";
+
         int lIDFichaje = 0;
-        DataSet dsUsuario=new DataSet();
+        DataSet dsUsuario = new DataSet();
         DataSet dsFichaje = new DataSet();
 
         DateTime actual = DateTime.Today;
@@ -35,6 +38,25 @@ namespace BoxHorario
         FilterInfoCollection camaras;
         private void frmFichaje_Load(object sender, EventArgs e)
         {
+            //todo: cambiar estos datos segun sea athos o requena
+            if (lIDEmpresa == 1)    //athos
+            {
+                ruta = @"c:\xls\";
+                cadenaConexion = "Data Source=46.226.45.108;Initial Catalog=Box;;User ID=sa;password=2015villaL";
+                picathos.Visible = true;
+                picrequena.Visible = false;
+            }
+            else         //requena
+            {
+                ruta = Path.GetTempPath();
+                serverftp = "93.189.95.201";
+                userftp = "requena";
+                passftp = "fichaje";
+                cadenaConexion = "Data Source=85.208.23.250;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
+                picathos.Visible = false;
+                picrequena.Visible = true;
+            }
+
             camaras = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
             this.Size = new Size(809, 814);   //login
@@ -68,16 +90,26 @@ namespace BoxHorario
                     if (dsFichaje.Tables[0].Rows.Count > 0)
                     {
                         fentrada = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaEntrada"];
-                        if (dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"] != DBNull.Value)
-                            fsalidad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"];
-                        if (dsFichaje.Tables[0].Rows[0]["FechaEntradaDescanso"] != DBNull.Value)
-                            fentradad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaEntradaDescanso"];
                         if (dsFichaje.Tables[0].Rows[0]["FechaSalida"] != DBNull.Value)
                         {
                             fsalida = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaSalida"];
                         }
                         else
                             lIDFichaje = (int)dsFichaje.Tables[0].Rows[0]["IDFichaje"];
+                        if (lIDEmpresa == 1)
+                        {
+                            if (dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"] != DBNull.Value)
+                                fsalidad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"];
+                            if (dsFichaje.Tables[0].Rows[0]["FechaEntradaDescanso"] != DBNull.Value)
+                                fentradad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaEntradaDescanso"];
+                        }
+                        else
+                        {
+                            if (dsFichaje.Tables[0].Rows[0]["FechaPausaFin"] != DBNull.Value)
+                                fsalidad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaFin"];
+                            if (dsFichaje.Tables[0].Rows[0]["FechaPausaInicio"] != DBNull.Value)
+                                fentradad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaInicio"];
+                        }
 
                     }
                     Fichaje();
@@ -175,7 +207,7 @@ namespace BoxHorario
             else
             {
                 lblentrada.Text = "";
-                lblentrada.Visible = false; 
+                lblentrada.Visible = false;
             }
             if (fsalidad != null)
             {
@@ -185,7 +217,7 @@ namespace BoxHorario
             else
             {
                 lblsalidadescanso.Text = "";
-                lblsalidadescanso.Visible= false;   
+                lblsalidadescanso.Visible = false;
             }
             if (fentradad != null)
             {
@@ -195,7 +227,7 @@ namespace BoxHorario
             else
             {
                 lblentradadescando.Text = "";
-                lblentradadescando.Visible= false;
+                lblentradadescando.Visible = false;
             }
             if (fsalida != null)
             {
@@ -205,7 +237,7 @@ namespace BoxHorario
             else
             {
                 lblsalida.Text = "";
-                lblsalida.Visible= false;
+                lblsalida.Visible = false;
             }
             //mensaje bienvenida.
             string nombre = dsUsuario.Tables[0].Rows[0]["Nombre"].ToString().Trim().Replace("Op.", "").TrimStart();
@@ -213,11 +245,11 @@ namespace BoxHorario
             if (posicion == -1)
                 posicion = nombre.Length;
             nombre = nombre.Substring(0, posicion);
-            nombre=nombre.Substring(0,1).ToUpper()+nombre.Substring(1).ToLower();
+            nombre = nombre.Substring(0, 1).ToUpper() + nombre.Substring(1).ToLower();
             if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 6)
                 lblmesaje.Text = "!Buenas noches! " + nombre;
             else if (DateTime.Now.Hour >= 6 && DateTime.Now.Hour < 14)
-                    lblmesaje.Text = "!Buenos días! " + nombre;
+                lblmesaje.Text = "!Buenos días! " + nombre;
             else if (DateTime.Now.Hour >= 14 && DateTime.Now.Hour < 21)
                 lblmesaje.Text = "!Buenas tardes! " + nombre;
             else
@@ -228,27 +260,52 @@ namespace BoxHorario
             CerrarCamara();
             timer2.Enabled = false;
 
-            int id = GrabarFichaje(); 
-            
-            foto.Image.Save(ruta + id.ToString().Trim() + "_" + fichero + ".jpg", ImageFormat.Jpeg);
+            int id = GrabarFichaje();
+            fichero = id.ToString().Trim() + "_" + fichero + ".jpg";
+
+            if (lIDEmpresa == 1) //athos
+            {
+                foto.Image.Save(ruta + fichero, ImageFormat.Jpeg);
+            }
+            else if (lIDEmpresa == 2) //requena ftp
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    //foto.Image.Save(ms, ImageFormat.Jpeg);
+                    //FtpSubir(ms, fichero);
+                    foto.Image.Save(ruta + fichero, ImageFormat.Jpeg);
+                    FtpSubir(ruta + fichero, fichero);
+                }
+            }
             foto.Image.Dispose();
 
-            //vuelve a pedir login
-            //this.Size = new Size(809, 428);   //login
             this.Size = new Size(809, 814);   //login
             panelcamara.Visible = false;
             panelfichaje.Visible = false;
             panellogin.Visible = true;
             btnAceptar.Enabled = true;
 
-            
         }
+        public void FtpSubir(string origen, string destino)
+        {
+            FTPConnection ftpConnection = new FTPConnection();
+            ftpConnection.ServerAddress = serverftp;
+            ftpConnection.ServerPort = 21;
+            ftpConnection.UserName =  userftp;
+            ftpConnection.Password = passftp;
+            ftpConnection.Connect();
+            ftpConnection.UploadFile(origen, destino);
+            ftpConnection.Close();
+
+            File.Delete(origen);
+        }
+        
         private void btnEntrada_Click(object sender, EventArgs e)
         {
             fentrada = DateTime.Now;
             fentradad = null;
             fsalidad = null;
-            fsalida= null;
+            fsalida = null;
             GrabarFoto("In");
         }
 
@@ -285,9 +342,9 @@ namespace BoxHorario
             Bitmap imagen = (Bitmap)eventArgs.Frame.Clone();
             foto.Image = resizeImage(imagen, new Size(600, 400));
         }
-        private Image resizeImage(Image imgToResize, Size size)
+        private System.Drawing.Image resizeImage(System.Drawing.Image imgToResize, Size size)
         {
-            return (Image)(new Bitmap(imgToResize, size));
+            return (System.Drawing.Image)(new Bitmap(imgToResize, size));
         }
         private void frmFichaje_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -296,7 +353,7 @@ namespace BoxHorario
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblhora.Text = DateTime.Now.ToString("HH:mm:ss");
-            if(actual!= DateTime.Today) 
+            if (actual != DateTime.Today)
             {
                 lbldia.Text = DateTime.Now.ToLongDateString();
             }
@@ -318,7 +375,7 @@ namespace BoxHorario
         {
             if (txtClave.Text == "Contraseña")
             {
-                txtClave.PasswordChar= '*';
+                txtClave.PasswordChar = '*';
                 txtClave.Text = "";
             }
         }
@@ -335,7 +392,7 @@ namespace BoxHorario
         private void timer2_Tick(object sender, EventArgs e)
         {
             CerrarCamara();
-            timer2.Enabled= false;
+            timer2.Enabled = false;
         }
 
         protected SqlConnection GetConnection()
@@ -344,7 +401,11 @@ namespace BoxHorario
         }
         private DataSet Login(string user, string pass)
         {
-            string cadena = "Select * from Usuarios where Login=@user and Clave=@pass and fechabaja is null";
+            string cadena = "";
+            if (lIDEmpresa == 1)
+                cadena = "Select * from Usuarios where Login='" + user + "' and Clave='" + pass + "' and fechabaja is null";
+            else if (lIDEmpresa == 2)
+                cadena = "Select * from Usuarios where Login='" + user + "' and Password='" + pass + "' and fechabaja is null";
             DataSet ds = new DataSet();
             using (var connection = GetConnection())
             {
@@ -353,8 +414,6 @@ namespace BoxHorario
                 {
                     command.Connection = connection;
                     command.CommandText = cadena;
-                    command.Parameters.AddWithValue("@user", user);
-                    command.Parameters.AddWithValue("@pass", pass);
                     command.CommandType = CommandType.Text;
                     SqlDataAdapter adapter = new SqlDataAdapter();
                     adapter.SelectCommand = command;
@@ -365,7 +424,13 @@ namespace BoxHorario
         }
         private DataSet Buscar()
         {
-            string cadena = "Select top 1 * from CentrosFichajes where IDUsuario=" + dsUsuario.Tables[0].Rows[0]["IDUsuario"].ToString() + " Order by IDFichaje desc";
+            string cadena = "";
+            if (lIDEmpresa == 1)
+                cadena = "Select top 1 * from CentrosFichajes where IDUsuario=" + dsUsuario.Tables[0].Rows[0]["IDUsuario"].ToString() + " Order by IDFichaje desc";
+            else
+                cadena = "Select top 1 * from Fichajes where IDUsuario=" + dsUsuario.Tables[0].Rows[0]["IDUsuario"].ToString() + " Order by IDFichaje desc";
+
+
             DataSet ds = new DataSet();
             using (var connection = GetConnection())
             {
@@ -390,25 +455,43 @@ namespace BoxHorario
                 using (var command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "CentrosFichajesActualizar";
                     command.CommandType = CommandType.StoredProcedure;
+                    if (lIDEmpresa == 1)
+                        command.CommandText = "CentrosFichajesActualizar";
+                    else
+                        command.CommandText = "FichajesActualizar";
                     SqlDataAdapter adapter = new SqlDataAdapter();
                     adapter.SelectCommand = command;
                     command.Parameters.Add("@IDFichaje", SqlDbType.Int, 4).Value = lIDFichaje;
                     command.Parameters.Add("@IDUsuario", SqlDbType.Int, 4).Value = (int)dsUsuario.Tables[0].Rows[0]["IDUsuario"];
                     command.Parameters.Add("@FechaEntrada", SqlDbType.DateTime).Value = (DateTime)fentrada;
-                    if (fsalidad != null)
-                        command.Parameters.Add("@FechaSalidaDescanso", SqlDbType.DateTime).Value = fsalidad;
-                    else
-                        command.Parameters.Add("@FechaSalidaDescanso", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
-                    if (fentradad != null)
-                        command.Parameters.Add("@FechaEntradaDescanso", SqlDbType.DateTime).Value = fentradad;
-                    else
-                        command.Parameters.Add("@FechaEntradaDescanso", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
                     if (fsalida != null)
                         command.Parameters.Add("@FechaSalida", SqlDbType.DateTime).Value = fsalida;
                     else
                         command.Parameters.Add("@FechaSalida", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
+
+                    if (lIDEmpresa == 1)
+                    {
+                        if (fsalidad != null)
+                            command.Parameters.Add("@FechaSalidaDescanso", SqlDbType.DateTime).Value = fsalidad;
+                        else
+                            command.Parameters.Add("@FechaSalidaDescanso", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
+                        if (fentradad != null)
+                            command.Parameters.Add("@FechaEntradaDescanso", SqlDbType.DateTime).Value = fentradad;
+                        else
+                            command.Parameters.Add("@FechaEntradaDescanso", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
+                    }
+                    else if (lIDEmpresa == 2)
+                    {
+                        if (fsalidad != null)
+                            command.Parameters.Add("@FechaPausaInicio", SqlDbType.DateTime).Value = fsalidad;
+                        else
+                            command.Parameters.Add("@FechaPausaInicio", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
+                        if (fentradad != null)
+                            command.Parameters.Add("@FechaPausaFin", SqlDbType.DateTime).Value = fentradad;
+                        else
+                            command.Parameters.Add("@FechaPausaFin", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
+                    }
                     return (int)command.ExecuteScalar();
                 }
             }
