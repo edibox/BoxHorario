@@ -261,20 +261,22 @@ namespace BoxHorario
             timer2.Enabled = false;
 
             int id = GrabarFichaje();
-            fichero = id.ToString().Trim() + "_" + fichero + ".jpg";
 
-            if (lIDEmpresa == 1) //athos
+            if (fichero == "In" || fichero == "Out")
             {
-                foto.Image.Save(ruta + fichero, ImageFormat.Jpeg);
-            }
-            else if (lIDEmpresa == 2) //requena ftp
-            {
-                using (MemoryStream ms = new MemoryStream())
+                fichero = id.ToString().Trim() + "_" + fichero + ".jpg";
+
+                if (lIDEmpresa == 1) //athos
                 {
-                    //foto.Image.Save(ms, ImageFormat.Jpeg);
-                    //FtpSubir(ms, fichero);
                     foto.Image.Save(ruta + fichero, ImageFormat.Jpeg);
-                    FtpSubir(ruta + fichero, fichero);
+                }
+                else if (lIDEmpresa == 2) //requena ftp
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        foto.Image.Save(ruta + fichero, ImageFormat.Jpeg);
+                        FtpSubir(ruta + fichero, fichero);
+                    }
                 }
             }
             foto.Image.Dispose();
@@ -313,7 +315,7 @@ namespace BoxHorario
         {
             fentradad = DateTime.Now;
             fsalida = null;
-            GrabarFoto("Re");
+            GrabarFoto("P1");
         }
 
         private void btnPausa_Click(object sender, EventArgs e)
@@ -321,7 +323,7 @@ namespace BoxHorario
             fsalidad = DateTime.Now;
             fentradad = null;
             fsalida = null;
-            GrabarFoto("Pa");
+            GrabarFoto("P2");
         }
 
         private void btnSalida_Click(object sender, EventArgs e)
