@@ -38,6 +38,8 @@ namespace BoxHorario
         FilterInfoCollection camaras;
         private void frmFichaje_Load(object sender, EventArgs e)
         {
+            btnCancelar.Visible = false;
+
             //todo: cambiar estos datos segun sea athos o requena
             if (lIDEmpresa == 1)    //athos
             {
@@ -77,6 +79,7 @@ namespace BoxHorario
                     MessageBox.Show("Usuario o contraseña no válidos.");
                 else
                 {
+                    btnCancelar.Visible = true;
                     lIDFichaje = 0;
                     txtUsuario.Text = "Usuario";
                     txtClave.Text = "Contraseña";
@@ -105,10 +108,10 @@ namespace BoxHorario
                         }
                         else
                         {
-                            if (dsFichaje.Tables[0].Rows[0]["FechaPausaFin"] != DBNull.Value)
-                                fsalidad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaFin"];
                             if (dsFichaje.Tables[0].Rows[0]["FechaPausaInicio"] != DBNull.Value)
-                                fentradad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaInicio"];
+                                fsalidad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaInicio"];
+                            if (dsFichaje.Tables[0].Rows[0]["FechaPausaFin"] != DBNull.Value)
+                                fentradad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaFin"];
                         }
 
                     }
@@ -136,6 +139,7 @@ namespace BoxHorario
             this.Size = new Size(809, 814);   //fichaje
 
             // botones
+
             if (fsalida != null)    //jornada finalizada-->entrada
             {
                 btnEntrada.Enabled = true;
@@ -261,24 +265,28 @@ namespace BoxHorario
             timer2.Enabled = false;
 
             int id = GrabarFichaje();
-
-            if (fichero == "In" || fichero == "Out")
+            if (id > 0)
             {
-                fichero = id.ToString().Trim() + "_" + fichero + ".jpg";
+                if (fichero == "In" || fichero == "Out")
+                {
+                    fichero = id.ToString().Trim() + "_" + fichero + ".jpg";
 
-                if (lIDEmpresa == 1) //athos
-                {
-                    foto.Image.Save(ruta + fichero, ImageFormat.Jpeg);
-                }
-                else if (lIDEmpresa == 2) //requena ftp
-                {
-                    using (MemoryStream ms = new MemoryStream())
+                    if (lIDEmpresa == 1) //athos
                     {
                         foto.Image.Save(ruta + fichero, ImageFormat.Jpeg);
-                        FtpSubir(ruta + fichero, fichero);
+                    }
+                    else if (lIDEmpresa == 2) //requena ftp
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            foto.Image.Save(ruta + fichero, ImageFormat.Jpeg);
+                            FtpSubir(ruta + fichero, fichero);
+                        }
                     }
                 }
             }
+            else
+                MessageBox.Show("Ya ha fichado hoy.");
             foto.Image.Dispose();
 
             this.Size = new Size(809, 814);   //login
@@ -286,8 +294,23 @@ namespace BoxHorario
             panelfichaje.Visible = false;
             panellogin.Visible = true;
             btnAceptar.Enabled = true;
+            btnCancelar.Visible = false;
 
         }
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            CerrarCamara();
+            timer2.Enabled = false;
+            foto.Image.Dispose();
+
+            this.Size = new Size(809, 814);   //login
+            panelcamara.Visible = false;
+            panelfichaje.Visible = false;
+            panellogin.Visible = true;
+            btnAceptar.Enabled = true;
+            btnCancelar.Visible = false;
+        }
+
         public void FtpSubir(string origen, string destino)
         {
             FTPConnection ftpConnection = new FTPConnection();
@@ -382,6 +405,7 @@ namespace BoxHorario
             }
         }
 
+   
         private void txtClave_Leave(object sender, EventArgs e)
         {
             if (txtClave.Text.Length == 0)

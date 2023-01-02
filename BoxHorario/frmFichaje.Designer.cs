@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFichaje));
             this.foto = new System.Windows.Forms.PictureBox();
             this.panelcabecera = new System.Windows.Forms.Panel();
+            this.picrequena = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.lbldia = new System.Windows.Forms.Label();
             this.picathos = new System.Windows.Forms.PictureBox();
@@ -56,14 +57,14 @@
             this.panellogin = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.picrequena = new System.Windows.Forms.PictureBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.foto)).BeginInit();
             this.panelcabecera.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picrequena)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picathos)).BeginInit();
             this.panelcamara.SuspendLayout();
             this.panelfichaje.SuspendLayout();
             this.panellogin.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picrequena)).BeginInit();
             this.SuspendLayout();
             // 
             // foto
@@ -88,6 +89,16 @@
             this.panelcabecera.Name = "panelcabecera";
             this.panelcabecera.Size = new System.Drawing.Size(793, 130);
             this.panelcabecera.TabIndex = 1;
+            // 
+            // picrequena
+            // 
+            this.picrequena.Image = ((System.Drawing.Image)(resources.GetObject("picrequena.Image")));
+            this.picrequena.Location = new System.Drawing.Point(-1, 8);
+            this.picrequena.Name = "picrequena";
+            this.picrequena.Size = new System.Drawing.Size(173, 93);
+            this.picrequena.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picrequena.TabIndex = 7;
+            this.picrequena.TabStop = false;
             // 
             // label8
             // 
@@ -155,6 +166,7 @@
             // 
             // panelfichaje
             // 
+            this.panelfichaje.Controls.Add(this.btnCancelar);
             this.panelfichaje.Controls.Add(this.btnSalida);
             this.panelfichaje.Controls.Add(this.btnPausa);
             this.panelfichaje.Controls.Add(this.lblmesaje);
@@ -399,15 +411,23 @@
             this.timer2.Interval = 30000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // picrequena
+            // btnCancelar
             // 
-            this.picrequena.Image = ((System.Drawing.Image)(resources.GetObject("picrequena.Image")));
-            this.picrequena.Location = new System.Drawing.Point(-1, 8);
-            this.picrequena.Name = "picrequena";
-            this.picrequena.Size = new System.Drawing.Size(173, 93);
-            this.picrequena.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picrequena.TabIndex = 7;
-            this.picrequena.TabStop = false;
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(647, 23);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.btnCancelar.Size = new System.Drawing.Size(108, 32);
+            this.btnCancelar.TabIndex = 15;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // frmFichaje
             // 
@@ -430,13 +450,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.foto)).EndInit();
             this.panelcabecera.ResumeLayout(false);
             this.panelcabecera.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picrequena)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picathos)).EndInit();
             this.panelcamara.ResumeLayout(false);
             this.panelfichaje.ResumeLayout(false);
             this.panelfichaje.PerformLayout();
             this.panellogin.ResumeLayout(false);
             this.panellogin.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picrequena)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -470,5 +490,6 @@
         private System.Windows.Forms.Label lblmesaje;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.PictureBox picrequena;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }
