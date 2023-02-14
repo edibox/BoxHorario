@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFichajeLector));
             this.txtLector = new System.Windows.Forms.TextBox();
             this.lblmesaje = new System.Windows.Forms.Label();
             this.lblsalida = new System.Windows.Forms.Label();
@@ -41,13 +42,18 @@
             this.panel = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.picrequena = new System.Windows.Forms.PictureBox();
+            this.picathos = new System.Windows.Forms.PictureBox();
             this.panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picrequena)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picathos)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLector
             // 
             this.txtLector.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLector.Location = new System.Drawing.Point(265, 32);
+            this.txtLector.Location = new System.Drawing.Point(344, 36);
             this.txtLector.Name = "txtLector";
             this.txtLector.PasswordChar = '*';
             this.txtLector.Size = new System.Drawing.Size(303, 71);
@@ -159,7 +165,7 @@
             this.panel.Controls.Add(this.label1);
             this.panel.Controls.Add(this.lblentrada);
             this.panel.Controls.Add(this.lblsalida);
-            this.panel.Location = new System.Drawing.Point(13, 121);
+            this.panel.Location = new System.Drawing.Point(12, 146);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(775, 214);
             this.panel.TabIndex = 22;
@@ -180,13 +186,47 @@
             this.timer2.Interval = 5000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label4.Location = new System.Drawing.Point(13, 118);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(19, 15);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "v2";
+            // 
+            // picrequena
+            // 
+            this.picrequena.Image = ((System.Drawing.Image)(resources.GetObject("picrequena.Image")));
+            this.picrequena.Location = new System.Drawing.Point(12, 22);
+            this.picrequena.Name = "picrequena";
+            this.picrequena.Size = new System.Drawing.Size(173, 93);
+            this.picrequena.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picrequena.TabIndex = 25;
+            this.picrequena.TabStop = false;
+            // 
+            // picathos
+            // 
+            this.picathos.Image = ((System.Drawing.Image)(resources.GetObject("picathos.Image")));
+            this.picathos.Location = new System.Drawing.Point(16, 17);
+            this.picathos.Name = "picathos";
+            this.picathos.Size = new System.Drawing.Size(173, 74);
+            this.picathos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picathos.TabIndex = 24;
+            this.picathos.TabStop = false;
+            // 
             // frmFichajeLector
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
-            this.ClientSize = new System.Drawing.Size(800, 357);
+            this.ClientSize = new System.Drawing.Size(812, 390);
+            this.Controls.Add(this.picrequena);
+            this.Controls.Add(this.picathos);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.txtLector);
@@ -195,6 +235,8 @@
             this.Load += new System.EventHandler(this.frmFichajeLector_Load);
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picrequena)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picathos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,5 +256,8 @@
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox picrequena;
+        private System.Windows.Forms.PictureBox picathos;
     }
 }
