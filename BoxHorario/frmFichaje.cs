@@ -1,16 +1,13 @@
 ﻿using AForge.Video;
 using AForge.Video.DirectShow;
+using EnterpriseDT.Net.Ftp;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Net;
-using System.Text;
 using System.Windows.Forms;
-using EnterpriseDT.Net.Ftp;
-using EnterpriseDT.Util;
 
 namespace BoxHorario
 {
@@ -40,7 +37,6 @@ namespace BoxHorario
         {
             btnCancelar.Visible = false;
 
-            //todo: cambiar estos datos segun sea athos o requena
             if (lIDEmpresa == 1)    //athos
             {
                 ruta = @"c:\xls\";
@@ -316,7 +312,7 @@ namespace BoxHorario
             FTPConnection ftpConnection = new FTPConnection();
             ftpConnection.ServerAddress = serverftp;
             ftpConnection.ServerPort = 21;
-            ftpConnection.UserName =  userftp;
+            ftpConnection.UserName = userftp;
             ftpConnection.Password = passftp;
             ftpConnection.Connect();
             ftpConnection.UploadFile(origen, destino);
@@ -324,7 +320,7 @@ namespace BoxHorario
 
             File.Delete(origen);
         }
-        
+
         private void btnEntrada_Click(object sender, EventArgs e)
         {
             fentrada = DateTime.Now;
@@ -405,7 +401,7 @@ namespace BoxHorario
             }
         }
 
-   
+
         private void txtClave_Leave(object sender, EventArgs e)
         {
             if (txtClave.Text.Length == 0)

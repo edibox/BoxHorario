@@ -16,7 +16,8 @@ namespace BoxHorario
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmFichaje());
+            //Application.Run(new frmFichaje());
+            Application.Run(new frmFichajeLector());
         }
     }
 }

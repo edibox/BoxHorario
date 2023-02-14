@@ -26,7 +26,7 @@
     <InstallUrl>http://www.softwarelogistica.es/RequenaFichaje/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -104,10 +104,19 @@
     <Compile Include="frmFichaje.Designer.cs">
       <DependentUpon>frmFichaje.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFichajeLector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFichajeLector.Designer.cs">
+      <DependentUpon>frmFichajeLector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmFichaje.resx">
       <DependentUpon>frmFichaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFichajeLector.resx">
+      <DependentUpon>frmFichajeLector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
