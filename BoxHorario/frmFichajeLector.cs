@@ -16,7 +16,6 @@ namespace BoxHorario
     {
         int lIDEmpresa = 1;     //1=Athos,2=requena
 
-        string ruta = "", serverftp = "", userftp = "", passftp = "";
         string cadenaConexion = "";
 
         int lIDFichaje = 0;
@@ -36,17 +35,12 @@ namespace BoxHorario
             panel.Visible= false;
             if (lIDEmpresa == 1)    //athos
             {
-                ruta = @"c:\xls\";
                 cadenaConexion = "Data Source=46.226.45.108;Initial Catalog=Box;;User ID=sa;password=2015villaL";
                 picathos.Visible = true;
                 picrequena.Visible = false;
             }
             else         //requena
             {
-                ruta = Path.GetTempPath();
-                serverftp = "93.189.95.201";
-                userftp = "requena";
-                passftp = "fichaje";
                 cadenaConexion = "Data Source=85.208.23.250;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
                 picathos.Visible = false;
                 picrequena.Visible = true;
