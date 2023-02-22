@@ -104,16 +104,16 @@ namespace BoxHorario
                         }
                         else if (fentradad != null)
                         {
-                            //fin pausa si menos < 6H
-                            if (horas.Hours < 6)
+                            //fin pausa si menos < 7H
+                            if (horas.Hours < 7)
                                 fsalidad = factual;
                             else
                                 fsalida = factual;
                         }
                         else
                         {
-                            //fin pausa si menos < 6H
-                            if (horas.Hours < 6)
+                            //fin pausa si menos < 7H
+                            if (horas.Hours < 7)
                                 fsalidad = factual;
                             else
                                 fsalida = factual;
