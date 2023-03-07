@@ -53,8 +53,8 @@ namespace BoxHorario
         {
             if (txtLector.Text.Length > 0 && ValidarInt(txtLector.Text))
             {
-                string leido = txtLector.Text;
-                dsUsuario = (DataSet)Login(int.Parse(leido));
+                string idusuario = txtLector.Text;
+                dsUsuario = (DataSet)Login(int.Parse(idusuario));
                 if (dsUsuario.Tables[0].Rows.Count == 0)
                 {
                     timer2.Enabled = true;
@@ -72,7 +72,7 @@ namespace BoxHorario
                     fentradad = null;
                     fsalidad = null;
                     lIDFichaje = 0;
-                    dsFichaje = (DataSet)Buscar(int.Parse(leido));
+                    dsFichaje = (DataSet)Buscar(int.Parse(idusuario));
                     if (dsFichaje.Tables[0].Rows.Count > 0 && dsFichaje.Tables[0].Rows[0]["FechaSalida"] == DBNull.Value)
                     {
                         lIDFichaje = (int)dsFichaje.Tables[0].Rows[0]["IDFichaje"];
