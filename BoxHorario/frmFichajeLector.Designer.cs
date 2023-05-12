@@ -45,6 +45,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.picrequena = new System.Windows.Forms.PictureBox();
             this.picathos = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picrequena)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picathos)).BeginInit();
@@ -53,7 +54,7 @@
             // txtLector
             // 
             this.txtLector.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLector.Location = new System.Drawing.Point(344, 36);
+            this.txtLector.Location = new System.Drawing.Point(344, 62);
             this.txtLector.Name = "txtLector";
             this.txtLector.PasswordChar = '*';
             this.txtLector.Size = new System.Drawing.Size(303, 71);
@@ -195,7 +196,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 15);
             this.label4.TabIndex = 22;
-            this.label4.Text = "v2";
+            this.label4.Text = "v3";
             // 
             // picrequena
             // 
@@ -217,6 +218,17 @@
             this.picathos.TabIndex = 24;
             this.picathos.TabStop = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.label5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label5.Location = new System.Drawing.Point(345, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(133, 32);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Leer tarjeta";
+            // 
             // frmFichajeLector
             // 
             this.AcceptButton = this.btnAceptar;
@@ -224,12 +236,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
             this.ClientSize = new System.Drawing.Size(812, 390);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.picrequena);
             this.Controls.Add(this.picathos);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.txtLector);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmFichajeLector";
             this.Text = "Fichaje";
             this.Load += new System.EventHandler(this.frmFichajeLector_Load);
@@ -259,5 +273,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox picrequena;
         private System.Windows.Forms.PictureBox picathos;
+        private System.Windows.Forms.Label label5;
     }
 }

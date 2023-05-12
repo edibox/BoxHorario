@@ -14,7 +14,7 @@ namespace BoxHorario
 {
     public partial class frmFichajeLector : Form
     {
-        int lIDEmpresa = 1;     //1=Athos,2=requena
+        int lIDEmpresa = 2;     //1=Athos,2=requena
 
         string cadenaConexion = "";
 
@@ -72,7 +72,9 @@ namespace BoxHorario
                     fentradad = null;
                     fsalidad = null;
                     lIDFichaje = 0;
+                    //carga el ultimo fichaje
                     dsFichaje = (DataSet)Buscar(int.Parse(idusuario));
+                    //si no ha salido
                     if (dsFichaje.Tables[0].Rows.Count > 0 && dsFichaje.Tables[0].Rows[0]["FechaSalida"] == DBNull.Value)
                     {
                         lIDFichaje = (int)dsFichaje.Tables[0].Rows[0]["IDFichaje"];
