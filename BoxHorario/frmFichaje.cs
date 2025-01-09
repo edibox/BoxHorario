@@ -50,7 +50,7 @@ namespace BoxHorario
                 serverftp = "93.189.95.201";
                 userftp = "requena";
                 passftp = "fichaje";
-                cadenaConexion = "Data Source=85.208.23.250;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
+                cadenaConexion = "Data Source=46.226.45.133;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
                 picathos.Visible = false;
                 picrequena.Visible = true;
             }

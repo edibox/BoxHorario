@@ -34,8 +34,8 @@
             this.lblmesaje = new System.Windows.Forms.Label();
             this.lblsalida = new System.Windows.Forms.Label();
             this.lblentrada = new System.Windows.Forms.Label();
-            this.lblsalidadescanso = new System.Windows.Forms.Label();
-            this.lblentradadescando = new System.Windows.Forms.Label();
+            this.lblpausainicio = new System.Windows.Forms.Label();
+            this.lblpausafin = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -97,31 +97,31 @@
             this.lblentrada.Text = "00:00";
             this.lblentrada.Visible = false;
             // 
-            // lblsalidadescanso
+            // lblpausainicio
             // 
-            this.lblsalidadescanso.AutoSize = true;
-            this.lblsalidadescanso.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblsalidadescanso.Font = new System.Drawing.Font("Segoe UI Semibold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblsalidadescanso.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblsalidadescanso.Location = new System.Drawing.Point(238, 124);
-            this.lblsalidadescanso.Name = "lblsalidadescanso";
-            this.lblsalidadescanso.Size = new System.Drawing.Size(150, 67);
-            this.lblsalidadescanso.TabIndex = 16;
-            this.lblsalidadescanso.Text = "00:00";
-            this.lblsalidadescanso.Visible = false;
+            this.lblpausainicio.AutoSize = true;
+            this.lblpausainicio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblpausainicio.Font = new System.Drawing.Font("Segoe UI Semibold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblpausainicio.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblpausainicio.Location = new System.Drawing.Point(238, 124);
+            this.lblpausainicio.Name = "lblpausainicio";
+            this.lblpausainicio.Size = new System.Drawing.Size(150, 67);
+            this.lblpausainicio.TabIndex = 16;
+            this.lblpausainicio.Text = "00:00";
+            this.lblpausainicio.Visible = false;
             // 
-            // lblentradadescando
+            // lblpausafin
             // 
-            this.lblentradadescando.AutoSize = true;
-            this.lblentradadescando.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblentradadescando.Font = new System.Drawing.Font("Segoe UI Semibold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblentradadescando.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblentradadescando.Location = new System.Drawing.Point(394, 124);
-            this.lblentradadescando.Name = "lblentradadescando";
-            this.lblentradadescando.Size = new System.Drawing.Size(150, 67);
-            this.lblentradadescando.TabIndex = 17;
-            this.lblentradadescando.Text = "00:00";
-            this.lblentradadescando.Visible = false;
+            this.lblpausafin.AutoSize = true;
+            this.lblpausafin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblpausafin.Font = new System.Drawing.Font("Segoe UI Semibold", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblpausafin.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblpausafin.Location = new System.Drawing.Point(394, 124);
+            this.lblpausafin.Name = "lblpausafin";
+            this.lblpausafin.Size = new System.Drawing.Size(150, 67);
+            this.lblpausafin.TabIndex = 17;
+            this.lblpausafin.Text = "00:00";
+            this.lblpausafin.Visible = false;
             // 
             // label1
             // 
@@ -158,11 +158,11 @@
             // 
             // panel
             // 
-            this.panel.Controls.Add(this.lblentradadescando);
+            this.panel.Controls.Add(this.lblpausafin);
             this.panel.Controls.Add(this.label3);
             this.panel.Controls.Add(this.lblmesaje);
             this.panel.Controls.Add(this.label2);
-            this.panel.Controls.Add(this.lblsalidadescanso);
+            this.panel.Controls.Add(this.lblpausainicio);
             this.panel.Controls.Add(this.label1);
             this.panel.Controls.Add(this.lblentrada);
             this.panel.Controls.Add(this.lblsalida);
@@ -196,7 +196,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 15);
             this.label4.TabIndex = 22;
-            this.label4.Text = "v3";
+            this.label4.Text = "v4";
             // 
             // picrequena
             // 
@@ -262,8 +262,8 @@
         private System.Windows.Forms.Label lblmesaje;
         private System.Windows.Forms.Label lblsalida;
         private System.Windows.Forms.Label lblentrada;
-        private System.Windows.Forms.Label lblsalidadescanso;
-        private System.Windows.Forms.Label lblentradadescando;
+        private System.Windows.Forms.Label lblpausainicio;
+        private System.Windows.Forms.Label lblpausafin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

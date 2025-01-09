@@ -14,6 +14,8 @@ namespace BoxHorario
 {
     public partial class frmFichajeLector : Form
     {
+        //Requena: https://www.softwarelogistica.es/BoxHorario/publish.htm
+        //Athos Logistica: https://www.softwarelogistica.es/BoxHorarioLogistica/publish.htm
         int lIDEmpresa = 2;     //1=Athos,2=requena
 
         string cadenaConexion = "";
@@ -23,7 +25,7 @@ namespace BoxHorario
         DataSet dsFichaje = new DataSet();
 
         DateTime factual = DateTime.Now;
-        DateTime? fsalida, fentradad, fsalidad;
+        DateTime? fsalida, fpausafin, fpausainicio;
         DateTime fentrada = DateTime.Now;
         public frmFichajeLector()
         {
@@ -41,7 +43,7 @@ namespace BoxHorario
             }
             else         //requena
             {
-                cadenaConexion = "Data Source=85.208.23.250;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
+                cadenaConexion = "Data Source=46.226.45.133;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
                 picathos.Visible = false;
                 picrequena.Visible = true;
             }
@@ -69,8 +71,8 @@ namespace BoxHorario
                     lIDFichaje = 0;
                     btnAceptar.Enabled = false;
                     fsalida = null;
-                    fentradad = null;
-                    fsalidad = null;
+                    fpausafin = null;
+                    fpausainicio = null;
                     lIDFichaje = 0;
                     //carga el ultimo fichaje
                     dsFichaje = (DataSet)Buscar(int.Parse(idusuario));
@@ -82,16 +84,16 @@ namespace BoxHorario
                         if (lIDEmpresa == 1)
                         {
                             if (dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"] != DBNull.Value)
-                                fsalidad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"];
+                                fpausainicio = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"];
                             if (dsFichaje.Tables[0].Rows[0]["FechaEntradaDescanso"] != DBNull.Value)
-                                fentradad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaEntradaDescanso"];
+                                fpausafin = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaEntradaDescanso"];
                         }
                         else
                         {
                             if (dsFichaje.Tables[0].Rows[0]["FechaPausaInicio"] != DBNull.Value)
-                                fsalidad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaInicio"];
+                                fpausainicio = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaInicio"];
                             if (dsFichaje.Tables[0].Rows[0]["FechaPausaFin"] != DBNull.Value)
-                                fentradad = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaFin"];
+                                fpausafin = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaPausaFin"];
                         }
 
                         //calcula horas desde fecha entrada.
@@ -99,16 +101,16 @@ namespace BoxHorario
                         TimeSpan horas = factual.Subtract(fentrada);
 
                         //calcula fechas
-                        if (fsalidad != null)
+                        if (fpausafin != null)
                         {
                             //salida turno
                             fsalida = factual;
                         }
-                        else if (fentradad != null)
+                        else if (fpausainicio != null)
                         {
                             //fin pausa si menos < 7H
                             if (horas.Hours < 7)
-                                fsalidad = factual;
+                                fpausafin = factual;
                             else
                                 fsalida = factual;
                         }
@@ -116,22 +118,22 @@ namespace BoxHorario
                         {
                             //fin pausa si menos < 7H
                             if (horas.Hours < 7)
-                                fsalidad = factual;
+                                fpausainicio = factual;
                             else
                                 fsalida = factual;
                         }
                         //muestra datos
                         lblentrada.Text = DateTime.Parse(fentrada.ToString()).ToString("HH:mm");
                         lblentrada.Visible = true;
-                        if (fsalidad != null)
+                        if (fpausainicio != null)
                         {
-                            lblsalidadescanso.Text = DateTime.Parse(fsalidad.ToString()).ToString("HH:mm");
-                            lblsalidadescanso.Visible = true;
+                            lblpausainicio.Text = DateTime.Parse(fpausainicio.ToString()).ToString("HH:mm");
+                            lblpausainicio.Visible = true;
                         }
-                        if (fentradad != null)
+                        if (fpausafin != null)
                         {
-                            lblentradadescando.Text = DateTime.Parse(fentradad.ToString()).ToString("HH:mm");
-                            lblentradadescando.Visible = true;
+                            lblpausafin.Text = DateTime.Parse(fpausafin.ToString()).ToString("HH:mm");
+                            lblpausafin.Visible = true;
                         }
                         if (fsalida != null)
                         {
@@ -181,23 +183,23 @@ namespace BoxHorario
 
                     if (lIDEmpresa == 1)
                     {
-                        if (fsalidad != null)
-                            command.Parameters.Add("@FechaSalidaDescanso", SqlDbType.DateTime).Value = fsalidad;
+                        if (fpausainicio != null)
+                            command.Parameters.Add("@FechaSalidaDescanso", SqlDbType.DateTime).Value = fpausainicio;
                         else
                             command.Parameters.Add("@FechaSalidaDescanso", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
-                        if (fentradad != null)
-                            command.Parameters.Add("@FechaEntradaDescanso", SqlDbType.DateTime).Value = fentradad;
+                        if (fpausafin != null)
+                            command.Parameters.Add("@FechaEntradaDescanso", SqlDbType.DateTime).Value = fpausafin;
                         else
                             command.Parameters.Add("@FechaEntradaDescanso", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
                     }
                     else if (lIDEmpresa == 2)
                     {
-                        if (fsalidad != null)
-                            command.Parameters.Add("@FechaPausaInicio", SqlDbType.DateTime).Value = fsalidad;
+                        if (fpausainicio != null)
+                            command.Parameters.Add("@FechaPausaInicio", SqlDbType.DateTime).Value = fpausainicio;
                         else
                             command.Parameters.Add("@FechaPausaInicio", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
-                        if (fentradad != null)
-                            command.Parameters.Add("@FechaPausaFin", SqlDbType.DateTime).Value = fentradad;
+                        if (fpausafin != null)
+                            command.Parameters.Add("@FechaPausaFin", SqlDbType.DateTime).Value = fpausafin;
                         else
                             command.Parameters.Add("@FechaPausaFin", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
                     }
@@ -258,8 +260,8 @@ namespace BoxHorario
             {
                 lblmesaje.Text = "";
                 lblentrada.Text = "";
-                lblentradadescando.Text = "";
-                lblsalidadescanso.Text = "";
+                lblpausafin.Text = "";
+                lblpausainicio.Text = "";
                 lblsalida.Text = "";
                 panel.Visible = false;
                 timer2.Enabled = false;
