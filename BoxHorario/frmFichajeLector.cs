@@ -16,7 +16,8 @@ namespace BoxHorario
     {
         //Requena: https://www.softwarelogistica.es/BoxHorario/publish.htm
         //Athos Logistica: https://www.softwarelogistica.es/BoxHorarioLogistica/publish.htm
-        int lIDEmpresa = 2;     //1=Athos,2=requena
+        //Athos Rail: https://www.softwarelogistica.es/BoxHorarioTerminal/publish.htm
+        int lIDEmpresa = 3;     //1=Athos,2=requena,3=athos rail
 
         string cadenaConexion = "";
 
@@ -40,12 +41,21 @@ namespace BoxHorario
                 cadenaConexion = "Data Source=46.226.45.108;Initial Catalog=Box;;User ID=sa;password=2015villaL";
                 picathos.Visible = true;
                 picrequena.Visible = false;
+                picathosrail.Visible = false;
             }
-            else         //requena
+            else if (lIDEmpresa == 1)         //requena
             {
                 cadenaConexion = "Data Source=46.226.45.133;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
                 picathos.Visible = false;
                 picrequena.Visible = true;
+                picathosrail.Visible = false;
+            }
+            else if (lIDEmpresa == 3)         //athos rail
+            {
+                cadenaConexion = "Data Source=46.226.45.133;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
+                picathos.Visible = false;
+                picrequena.Visible = false;
+                picathosrail.Visible = true;
             }
             txtLector.Focus();
         }
@@ -56,7 +66,7 @@ namespace BoxHorario
             if (txtLector.Text.Length > 0 && ValidarInt(txtLector.Text))
             {
                 string idusuario = txtLector.Text;
-                dsUsuario = (DataSet)Login(int.Parse(idusuario));
+                dsUsuario = (DataSet)Login(int.Parse(idusuario), lIDEmpresa);
                 if (dsUsuario.Tables[0].Rows.Count == 0)
                 {
                     timer2.Enabled = true;
@@ -207,9 +217,16 @@ namespace BoxHorario
                 }
             }
         }
-        private DataSet Login(int idusuario)
+        private DataSet Login(int idusuario, int idempresa)
         {
             string cadena = "select * from usuarios where IDUsuario=" + idusuario + " and FechaBaja Is null";
+            if (idempresa == 1) //athos logistica
+                cadena += " and IDEmpresa=9";
+            else if (idempresa == 2) //requena
+                cadena += " and IDEmpresa=1";
+            else if (idempresa == 3) //athos rail
+                cadena += " and IDEmpresa=2";
+
             DataSet ds = new DataSet();
             using (var connection = GetConnection())
             {

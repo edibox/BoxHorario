@@ -46,9 +46,11 @@
             this.picrequena = new System.Windows.Forms.PictureBox();
             this.picathos = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.picathosrail = new System.Windows.Forms.PictureBox();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picrequena)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picathos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picathosrail)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLector
@@ -201,7 +203,7 @@
             // picrequena
             // 
             this.picrequena.Image = ((System.Drawing.Image)(resources.GetObject("picrequena.Image")));
-            this.picrequena.Location = new System.Drawing.Point(12, 22);
+            this.picrequena.Location = new System.Drawing.Point(16, 17);
             this.picrequena.Name = "picrequena";
             this.picrequena.Size = new System.Drawing.Size(173, 93);
             this.picrequena.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -229,6 +231,17 @@
             this.label5.TabIndex = 22;
             this.label5.Text = "Leer tarjeta";
             // 
+            // picathosrail
+            // 
+            this.picathosrail.Image = ((System.Drawing.Image)(resources.GetObject("picathosrail.Image")));
+            this.picathosrail.Location = new System.Drawing.Point(16, 17);
+            this.picathosrail.Name = "picathosrail";
+            this.picathosrail.Size = new System.Drawing.Size(173, 93);
+            this.picathosrail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picathosrail.TabIndex = 26;
+            this.picathosrail.TabStop = false;
+            this.picathosrail.Visible = false;
+            // 
             // frmFichajeLector
             // 
             this.AcceptButton = this.btnAceptar;
@@ -236,6 +249,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
             this.ClientSize = new System.Drawing.Size(812, 390);
+            this.Controls.Add(this.picathosrail);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.picrequena);
             this.Controls.Add(this.picathos);
@@ -251,6 +265,7 @@
             this.panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picrequena)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picathos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picathosrail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,5 +289,6 @@
         private System.Windows.Forms.PictureBox picrequena;
         private System.Windows.Forms.PictureBox picathos;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox picathosrail;
     }
 }
