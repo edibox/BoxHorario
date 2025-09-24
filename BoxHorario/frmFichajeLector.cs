@@ -202,7 +202,7 @@ namespace BoxHorario
                         else
                             command.Parameters.Add("@FechaEntradaDescanso", SqlDbType.DateTime).Value = System.Data.SqlTypes.SqlDateTime.Null;
                     }
-                    else if (lIDEmpresa == 2)
+                    else
                     {
                         if (fpausainicio != null)
                             command.Parameters.Add("@FechaPausaInicio", SqlDbType.DateTime).Value = fpausainicio;
