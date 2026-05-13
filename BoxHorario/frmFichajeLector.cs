@@ -1,12 +1,6 @@
-﻿using AForge.Video;
-using AForge.Video.DirectShow;
-using EnterpriseDT.Net.Ftp;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Windows.Forms;
 
 
@@ -17,7 +11,7 @@ namespace BoxHorario
         //Requena: https://www.softwarelogistica.es/BoxHorario/publish.htm
         //Athos Logistica: https://www.softwarelogistica.es/BoxHorarioLogistica/publish.htm
         //Athos Rail: https://www.softwarelogistica.es/BoxHorarioTerminal/publish.htm
-        int lIDEmpresa = 3;     //1=Athos,2=requena,3=athos rail
+        int lIDEmpresa = 2;     //1=Athos,2=requena,3=athos rail
 
         string cadenaConexion = "";
 
@@ -35,7 +29,7 @@ namespace BoxHorario
 
         private void frmFichajeLector_Load(object sender, EventArgs e)
         {
-            panel.Visible= false;
+            panel.Visible = false;
             if (lIDEmpresa == 1)    //athos
             {
                 cadenaConexion = "Data Source=46.226.45.108;Initial Catalog=Box;;User ID=sa;password=2015villaL";
@@ -43,7 +37,7 @@ namespace BoxHorario
                 picrequena.Visible = false;
                 picathosrail.Visible = false;
             }
-            else if (lIDEmpresa == 1)         //requena
+            else if (lIDEmpresa == 2)         //requena
             {
                 cadenaConexion = "Data Source=46.226.45.133;Initial Catalog=RAIL;;User ID=sa;password=2015villaL*";
                 picathos.Visible = false;
@@ -60,7 +54,7 @@ namespace BoxHorario
             txtLector.Focus();
         }
 
-       
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (txtLector.Text.Length > 0 && ValidarInt(txtLector.Text))
@@ -76,6 +70,8 @@ namespace BoxHorario
                 }
                 else
                 {
+                    bool grabar = true;
+
                     Bienvenida();
                     factual = DateTime.Now;
                     lIDFichaje = 0;
@@ -89,9 +85,11 @@ namespace BoxHorario
                     //si no ha salido
                     if (dsFichaje.Tables[0].Rows.Count > 0 && dsFichaje.Tables[0].Rows[0]["FechaSalida"] == DBNull.Value)
                     {
+                        //si no han pasado 10 segundos no deja fichar.
+
                         lIDFichaje = (int)dsFichaje.Tables[0].Rows[0]["IDFichaje"];
 
-                        if (lIDEmpresa == 1)
+                        if (lIDEmpresa == 1)    //athos logistica
                         {
                             if (dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"] != DBNull.Value)
                                 fpausainicio = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaSalidaDescanso"];
@@ -109,48 +107,58 @@ namespace BoxHorario
                         //calcula horas desde fecha entrada.
                         fentrada = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaEntrada"];
                         TimeSpan horas = factual.Subtract(fentrada);
-
-                        //calcula fechas
-                        if (fpausafin != null)
+                        DateTime falta = (DateTime)dsFichaje.Tables[0].Rows[0]["FechaAlta"]; //fecha ultimo fichaje
+                        TimeSpan segundos = factual.Subtract(falta);
+                        if (segundos.Seconds < 10)
                         {
-                            //salida turno
-                            fsalida = factual;
-                        }
-                        else if (fpausainicio != null)
-                        {
-                            //fin pausa si menos < 7H
-                            if (horas.Hours < 7)
-                                fpausafin = factual;
-                            else
-                                fsalida = factual;
+                            grabar = false;
+                            lblmesaje.Text = "No han pasado 10 segundos desde el último fichaje.";
+                            Console.Beep(3000, 2000);
                         }
                         else
                         {
-                            //fin pausa si menos < 7H
-                            if (horas.Hours < 7)
-                                fpausainicio = factual;
-                            else
+                            //calcula fechas
+                            if (fpausafin != null)
+                            {
+                                //salida turno
                                 fsalida = factual;
+                            }
+                            else if (fpausainicio != null)
+                            {
+                                //fin pausa si menos < 7H
+                                if (horas.Hours < 7)
+                                    fpausafin = factual;
+                                else
+                                    fsalida = factual;
+                            }
+                            else
+                            {
+                                //fin pausa si menos < 7H
+                                if (horas.Hours < 7 && lIDEmpresa != 3)
+                                    fpausainicio = factual;
+                                else
+                                    fsalida = factual;
+                            }
+                            //muestra datos
+                            lblentrada.Text = DateTime.Parse(fentrada.ToString()).ToString("HH:mm");
+                            lblentrada.Visible = true;
+                            if (fpausainicio != null)
+                            {
+                                lblpausainicio.Text = DateTime.Parse(fpausainicio.ToString()).ToString("HH:mm");
+                                lblpausainicio.Visible = true;
+                            }
+                            if (fpausafin != null)
+                            {
+                                lblpausafin.Text = DateTime.Parse(fpausafin.ToString()).ToString("HH:mm");
+                                lblpausafin.Visible = true;
+                            }
+                            if (fsalida != null)
+                            {
+                                lblsalida.Text = DateTime.Parse(fsalida.ToString()).ToString("HH:mm");
+                                lblsalida.Visible = true;
+                            }
+                            Console.Beep(1500, 100);
                         }
-                        //muestra datos
-                        lblentrada.Text = DateTime.Parse(fentrada.ToString()).ToString("HH:mm");
-                        lblentrada.Visible = true;
-                        if (fpausainicio != null)
-                        {
-                            lblpausainicio.Text = DateTime.Parse(fpausainicio.ToString()).ToString("HH:mm");
-                            lblpausainicio.Visible = true;
-                        }
-                        if (fpausafin != null)
-                        {
-                            lblpausafin.Text = DateTime.Parse(fpausafin.ToString()).ToString("HH:mm");
-                            lblpausafin.Visible = true;
-                        }
-                        if (fsalida != null)
-                        {
-                            lblsalida.Text = DateTime.Parse(fsalida.ToString()).ToString("HH:mm");
-                            lblsalida.Visible = true;
-                        }
-                        Console.Beep(1500, 100);
                     }
                     else
                     {
@@ -158,7 +166,10 @@ namespace BoxHorario
                         fentrada = factual;
                         Console.Beep(1500, 100);
                     }
-                    GrabarFichaje();
+                    if (grabar)
+                    {
+                        GrabarFichaje();
+                    }
                     btnAceptar.Enabled = true;
                 }
             }
@@ -167,7 +178,7 @@ namespace BoxHorario
             txtLector.Text = "";
             txtLector.Focus();
         }
-       
+
         internal void GrabarFichaje()
         {
             using (var connection = GetConnection())

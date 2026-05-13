@@ -198,7 +198,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 15);
             this.label4.TabIndex = 22;
-            this.label4.Text = "v4";
+            this.label4.Text = "v5";
             // 
             // picrequena
             // 
