@@ -11,7 +11,7 @@ namespace BoxHorario
         //Requena: https://www.softwarelogistica.es/BoxHorario/publish.htm
         //Athos Logistica: https://www.softwarelogistica.es/BoxHorarioLogistica/publish.htm
         //Athos Rail: https://www.softwarelogistica.es/BoxHorarioTerminal/publish.htm
-        int lIDEmpresa = 2;     //1=Athos,2=requena,3=athos rail
+        int lIDEmpresa = 3;     //1=Athos,2=requena,3=athos rail
 
         string cadenaConexion = "";
 
